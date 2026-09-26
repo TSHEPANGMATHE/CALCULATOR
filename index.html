@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Calculator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="calculator">
+
+    <h1>Calculator</h1>
+
+    <!-- This shows what you're calculating and the answer -->
+    <div class="screen">
+      <div id="expression" class="expression"></div>
+      <div id="display" class="display">0</div>
+    </div>
+
+    <!-- Scientific buttons -->
+    <div class="buttons scientific-buttons">
+      <button data-op="sin">sin</button>
+      <button data-op="cos">cos</button>
+      <button data-op="tan">tan</button>
+      <button data-op="log">log</button>
+      <button data-op="ln">ln</button>
+      <button data-const="pi">pi</button>
+      <button data-const="e">e</button>
+      <button data-op="power">x^y</button>
+      <button data-op="square">x^2</button>
+      <button data-op="sqrt">sqrt</button>
+    </div>
+
+    <!-- Regular calculator buttons -->
+    <div class="buttons main-buttons">
+      <button id="clearBtn" class="danger">C</button>
+      <button id="backspaceBtn" class="danger">DEL</button>
+      <button data-op="percent" class="grey">%</button>
+      <button data-op="divide" class="operator">/</button>
+
+      <button data-digit="7">7</button>
+      <button data-digit="8">8</button>
+      <button data-digit="9">9</button>
+      <button data-op="multiply" class="operator">x</button>
+
+      <button data-digit="4">4</button>
+      <button data-digit="5">5</button>
+      <button data-digit="6">6</button>
+      <button data-op="subtract" class="operator">-</button>
+
+      <button data-digit="1">1</button>
+      <button data-digit="2">2</button>
+      <button data-digit="3">3</button>
+      <button data-op="add" class="operator">+</button>
+
+      <button data-op="negate" class="grey">+/-</button>
+      <button data-digit="0">0</button>
+      <button id="decimalBtn" class="grey">.</button>
+      <button id="equalsBtn" class="equals">=</button>
+
+      <button data-op="modulus" class="grey wide">mod</button>
+    </div>
+
+  </div>
+
+  <!-- The history list is a separate box under the calculator -->
+  <div class="history-box">
+    <div class="history-title">
+      <h2>History</h2>
+      <button id="clearHistoryBtn">Clear</button>
+    </div>
+    <ul id="historyList">
+      <li class="empty-message">No calculations yet</li>
+    </ul>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

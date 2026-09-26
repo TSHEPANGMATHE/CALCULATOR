@@ -1,0 +1,328 @@
+/* =========================================================
+   CSS Variables
+   All the colours live here so the whole theme can be
+   changed by editing this one place instead of hunting
+   through the file.
+   ========================================================= */
+:root {
+  /* Backgrounds - deep navy/charcoal, not pure black */
+  --bg-page: #0d1117;
+  --bg-card: #161b22;
+  --bg-screen: #0a0e14;
+  --bg-key: #21262d;
+  --bg-key-hover: #2d333b;
+  --bg-key-active: #383f47;
+
+  /* Accent colours */
+  --accent-blue: #58a6ff;      /* operators: + - x / */
+  --accent-blue-bg: rgba(88, 166, 255, 0.12);
+  --accent-blue-bg-hover: rgba(88, 166, 255, 0.22);
+
+  --accent-green: #3fb950;     /* equals / success */
+  --accent-green-hover: #4fd162;
+
+  --accent-red: #f85149;       /* clear / delete / error */
+  --accent-red-bg: rgba(248, 81, 73, 0.12);
+  --accent-red-bg-hover: rgba(248, 81, 73, 0.22);
+
+  /* Text */
+  --text-primary: #e6edf3;
+  --text-secondary: #8b949e;
+  --text-muted: #6e7681;
+
+  --border-color: #30363d;
+
+  /* Shape + motion, kept consistent everywhere */
+  --radius-card: 16px;
+  --radius-key: 10px;
+  --transition: 130ms ease;
+}
+
+/* =========================================================
+   Basic page setup
+   ========================================================= */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: 32px 16px;
+  margin: 0;
+}
+
+h1 {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-align: center;
+  margin: 0 0 16px 0;
+  color: var(--text-primary);
+}
+
+/* =========================================================
+   The calculator card
+   Capped width so it doesn't blow up on desktop, but still
+   comfortable to tap on mobile.
+   ========================================================= */
+.calculator {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-card);
+  box-shadow:
+    0 12px 32px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(255, 255, 255, 0.02);
+  padding: 20px;
+  width: 100%;
+  max-width: 340px;
+}
+
+/* =========================================================
+   Screen - where the expression and result are shown
+   ========================================================= */
+.screen {
+  background-color: var(--bg-screen);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 18px 16px 14px;
+  margin-bottom: 14px;
+  text-align: right;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.expression {
+  color: var(--text-muted);
+  font-family: ui-monospace, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 14px;
+  height: 18px;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.display {
+  color: var(--text-primary);
+  font-family: ui-monospace, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+  font-weight: 500;
+  font-size: clamp(22px, 7vw, 34px);
+  line-height: 1.25;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  margin-top: 2px;
+}
+
+/* =========================================================
+   Button grid layout
+   ========================================================= */
+.buttons {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.scientific-buttons {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.main-buttons {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* =========================================================
+   Buttons - base style shared by every key
+   Digit keys use this as-is; other classes below layer
+   colour on top for the different button roles.
+   ========================================================= */
+button {
+  border: none;
+  border-radius: var(--radius-key);
+  padding: 14px 0;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-primary);
+  background-color: var(--bg-key);
+  cursor: pointer;
+  transition: background-color var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+
+button:hover {
+  background-color: var(--bg-key-hover);
+}
+
+/* Pressing a button gives a small, snappy "click" feel */
+button:active {
+  background-color: var(--bg-key-active);
+  transform: scale(0.96);
+}
+
+/* Keyboard users get a visible focus ring, mouse users don't */
+button:focus-visible {
+  outline: 2px solid var(--accent-blue);
+  outline-offset: 2px;
+}
+
+/* --- Operator buttons: +  -  x  / --- */
+.operator {
+  background-color: var(--accent-blue-bg);
+  color: var(--accent-blue);
+  font-size: 18px;
+}
+
+.operator:hover {
+  background-color: var(--accent-blue-bg-hover);
+}
+
+/* --- Equals: the one clear "go" action, so it stands out most --- */
+.equals {
+  background-color: var(--accent-green);
+  color: #06240f;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.equals:hover {
+  background-color: var(--accent-green-hover);
+}
+
+/* --- Clear / Delete: red is reserved only for these two --- */
+.danger {
+  background-color: var(--accent-red-bg);
+  color: var(--accent-red);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.danger:hover {
+  background-color: var(--accent-red-bg-hover);
+}
+
+/* --- Secondary utility keys: %, +/-, ., mod --- */
+.grey {
+  background-color: var(--bg-key);
+  color: var(--text-secondary);
+}
+
+.wide {
+  grid-column: span 2;
+}
+
+/* --- Scientific row: smaller and quieter, since it's used less
+   often than the main pad and shouldn't compete with it --- */
+.scientific-buttons button {
+  font-size: 13px;
+  padding: 9px 0;
+  background-color: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.scientific-buttons button:hover {
+  background-color: var(--bg-key-hover);
+  color: var(--text-primary);
+}
+
+/* =========================================================
+   History box - styled as its own card to match the
+   calculator, so the two feel like one coherent design.
+   ========================================================= */
+.history-box {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-card);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+  padding: 18px 20px;
+  width: 100%;
+  max-width: 340px;
+  margin-top: 16px;
+}
+
+.history-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.history-title h2 {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  margin: 0;
+  color: var(--text-secondary);
+}
+
+#clearHistoryBtn {
+  background: none;
+  color: var(--accent-red);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+#clearHistoryBtn:hover {
+  background-color: var(--accent-red-bg);
+}
+
+#historyList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+#historyList li {
+  padding: 8px 4px;
+  border-bottom: 1px solid var(--border-color);
+  font-family: ui-monospace, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+#historyList li:last-child {
+  border-bottom: none;
+}
+
+.empty-message {
+  color: var(--text-muted);
+  font-style: italic;
+  font-family: inherit;
+}
+
+/* =========================================================
+   Responsive design
+   The card already has a max-width, so on desktop and
+   laptop screens it just stays a comfortable fixed size
+   and sits in the middle of the page. These media queries
+   only need to handle the smaller end - tablet and phone.
+   ========================================================= */
+@media (max-width: 420px) {
+  body {
+    padding: 20px 12px;
+  }
+
+  .calculator,
+  .history-box {
+    max-width: 100%;
+    padding: 16px;
+  }
+
+  button {
+    padding: 12px 0;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 340px) {
+  .buttons {
+    gap: 6px;
+  }
+}
